@@ -11,17 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ru.geekbrains.notes.IRepository;
 import ru.geekbrains.notes.R;
 import ru.geekbrains.notes.data.Note;
 import ru.geekbrains.notes.data.NoteDataReader;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements AdapterChangeable{
 
-    private NoteDataReader noteDataReader;                  // Здесь нам нужен только читатель дарнных
+    private IRepository repository;
     private OnMenuItemClickListener itemMenuClickListener;  // Слушатель, будет устанавливаться извне
 
-    public NoteAdapter(NoteDataReader noteDataReader) {
-        this.noteDataReader = noteDataReader;
+    public NoteAdapter(IRepository repository) {
+        this.repository = repository;
     }
 
     @Override
@@ -43,12 +44,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull NoteAdapter.ViewHolder holder, int position) {
-        holder.bind(noteDataReader.getPosition(position));
+        holder.bind(repository.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return noteDataReader.getCount();
+        return repository.getCount();
     }
 
     // установка слушателя

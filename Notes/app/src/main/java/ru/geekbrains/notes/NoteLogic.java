@@ -1,21 +1,14 @@
 package ru.geekbrains.notes;
 
-import android.content.Context;
-
 import ru.geekbrains.notes.data.Note;
-import ru.geekbrains.notes.data.NoteDataReader;
-import ru.geekbrains.notes.data.NoteDataSource;
 import ru.geekbrains.notes.ui.AdapterChangeable;
 
 public class NoteLogic {
-    private NoteDataSource notesDataSource;     // Источник данных
-    private NoteDataReader noteDataReader;      // Читатель данных
+    private IRepository repository;
     private AdapterChangeable adapter;           // Отправим сигнал изменения данных
 
-    public NoteLogic(Context context){
-        notesDataSource = new NoteDataSource(context);
-        notesDataSource.open();
-        noteDataReader = notesDataSource.getNoteDataReader();
+    public NoteLogic(IRepository repository){
+        this.repository = repository;
     }
 
     public void setAdapter(AdapterChangeable adapter){
@@ -23,31 +16,30 @@ public class NoteLogic {
     }
 
     public void addNote(Note note){
-        notesDataSource.addNote(note);
+        getRepository().add(note);
         updateNote();
     }
 
     public void editNote(Note note) {
-        notesDataSource.editNote(note);
+        getRepository().update(note);
         updateNote();
     }
 
     public void deleteNote(Note note) {
-        notesDataSource.deleteNote(note);
+        getRepository().delete(note);
         updateNote();
     }
 
     public void clearList() {
-        notesDataSource.deleteAll();
+        getRepository().deleteAll();
         updateNote();
     }
 
     private void updateNote(){
-        getNoteDataReader().Refresh();
         adapter.notifyDataChange();
     }
 
-    public NoteDataReader getNoteDataReader() {
-        return noteDataReader;
+    public IRepository getRepository() {
+        return repository;
     }
 }
