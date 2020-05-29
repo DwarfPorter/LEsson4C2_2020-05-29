@@ -1,8 +1,9 @@
-package ru.geekbrains.notes.data;
+package ru.geekbrains.notes.dataSQLite;
 
 import android.content.Context;
 
 import ru.geekbrains.notes.IRepository;
+import ru.geekbrains.notes.data.Note;
 
 public class SQLiteRepository implements IRepository {
 

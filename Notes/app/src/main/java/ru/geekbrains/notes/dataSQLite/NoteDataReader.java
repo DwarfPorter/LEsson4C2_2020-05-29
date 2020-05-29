@@ -1,10 +1,12 @@
-package ru.geekbrains.notes.data;
+package ru.geekbrains.notes.dataSQLite;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.Closeable;
 import java.io.IOException;
+
+import ru.geekbrains.notes.data.Note;
 
 public class NoteDataReader implements Closeable {
 

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import ru.geekbrains.notes.IRepository;
 import ru.geekbrains.notes.R;
 import ru.geekbrains.notes.data.Note;
-import ru.geekbrains.notes.data.NoteDataReader;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements AdapterChangeable{
 
